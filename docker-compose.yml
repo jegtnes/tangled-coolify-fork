@@ -1,6 +1,10 @@
 services:
   knot:
-    build: .
+    build:
+      context: .
+      args:
+        UID: 1000
+        GID: 1000
     environment:
       KNOT_SERVER_HOSTNAME: ${KNOT_SERVER_HOSTNAME}
       KNOT_SERVER_OWNER: ${KNOT_SERVER_OWNER}

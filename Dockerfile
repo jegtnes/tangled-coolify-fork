@@ -20,11 +20,16 @@ label org.opencontainers.image.url='https://tangled.sh'
 label org.opencontainers.image.vendor='tangled.sh'
 label org.opencontainers.image.licenses='MIT'
 
+arg UID=1000
+arg GID=1000
+
 copy rootfs .
 run chmod 755 /etc
 run chmod -R 755 /etc/s6-overlay
 run apk add shadow s6-overlay execline openssl openssh git curl bash
-run useradd -d /home/git git && openssl rand -hex 16 | passwd --stdin git
+run groupadd -g $GID -f git
+run useradd -u $UID -g $GID -d /home/git git
+run openssl rand -hex 16 | passwd --stdin git
 run mkdir -p /home/git/repositories && chown -R git:git /home/git
 copy --from=builder /usr/bin/knot /usr/bin
 run mkdir /app && chown -R git:git /app

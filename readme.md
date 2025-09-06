@@ -29,15 +29,29 @@ docker build -t knot:latest --build-arg TAG=master .
 The command above for example will build the latest commit on the `master`
 branch.
 
+By default it will also create a `git` user with user and group ID 1000:1000,
+but you can change it with the `UID` and `GID` build arguments.
+
+```sh
+docker build -t knot:latest --build-arg UID=$(id -u) GID=$(id -g)
+```
+
+The command above for example will create a user with the host user's UID and GID.
+This is useful if you are bind mounting the repositories and app folder on the host,
+as in the provided `docker-compose.yml` file.
+
 <hr style="margin-bottom: 20px; margin-top: 10px" />
 
-When using compose, it can be specified as a build argument which will be
+When using compose, these can be specified as build arguments which will be
 passed to the builder.
 
 ```yaml
 build:
   context: .
-  args: { TAG: master }
+  args:
+    TAG: master
+    UID: 1000
+    GID: 1000
 ```
 
 This will for example tell docker to build it using the `master` branch like
