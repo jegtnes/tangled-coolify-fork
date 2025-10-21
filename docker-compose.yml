@@ -32,6 +32,6 @@ services:
       - ${KNOT_SERVER_PORT:-443}:443
       - ${KNOT_SERVER_PORT:-443}:443/udp
     volumes:
-      - caddy_data:/data
+      - ./caddy_data:/data
     restart: always
     profiles: ["caddy"]
