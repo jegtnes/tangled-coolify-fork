@@ -10,7 +10,7 @@ services:
       KNOT_SERVER_OWNER: ${KNOT_SERVER_OWNER}
       KNOT_SERVER_DB_PATH: /app/knotserver.db
       KNOT_REPO_SCAN_PATH: /home/git/repositories
-      KNOT_SERVER_INTERNAL_LISTEN_ADDR: 0.0.0.0:5555
+      KNOT_SERVER_INTERNAL_LISTEN_ADDR: 0.0.0.0:5444
     volumes:
       - ./keys:/etc/ssh/keys
       - ./repositories:/home/git/repositories
